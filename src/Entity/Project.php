@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use DateTimeInterface;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[ApiResource(
@@ -33,11 +34,11 @@ class Project
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['read', 'write'])]
-    private ?\DateTimeInterface $startDate = null;
+    private ?DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Groups(['read', 'write'])]
-    private ?\DateTimeInterface $endDate = null;
+    private ?DateTimeInterface $endDate = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'projects')]
     #[Groups(['read', 'write'])]
@@ -77,24 +78,24 @@ class Project
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?DateTimeInterface
     {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): static
+    public function setStartDate(DateTimeInterface $startDate): static
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): static
+    public function setEndDate(?DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
 
